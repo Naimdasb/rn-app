@@ -5,31 +5,40 @@
  * @format
  * @flow strict-local
  */
-
-import React from 'react';
+import 'react-native-gesture-handler';
+import React, {useState, useEffect} from 'react';
 import {
   
   StyleSheet,
-  
   View,
   Text,
+  TextInput
   
 } from 'react-native';
 
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+
+
+
+import Calculator from './screens/Calculator'
+import Home from './screens/Home'
+
+const Tab = createMaterialTopTabNavigator();
 
 
 const App: () => React$Node = () => {
-  return (
-    <View>
-      <Text style={styles.text}>Dolar App</Text>
-    </View>
-  );
-};
+  
+    return(
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Precios" component={Home}/>
+          <Tab.Screen name="Calculadora" component={Calculator}/>
+        </Tab.Navigator>
+      </NavigationContainer>
+    )
+}
 
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 30
-  }
-});
+
 
 export default App;
