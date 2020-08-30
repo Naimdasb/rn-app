@@ -12,6 +12,7 @@ export default function Calculator() {
     const [calc, setCalc] = useState(0)
     const [data, setData] = useState([{ label: 'Oficial' }, { label: 'Blue' }])
     const [value, setVal] = useState("Oficial")
+    const [result, setResult] = useState(0)
 
     useEffect(()=> {
         getPrice()
@@ -52,33 +53,33 @@ export default function Calculator() {
 
 
     return (
-        <>
+        <View style={styles.container}>
+            <Text style={styles.text}>$ {result}</Text>
             <RadioButtonRN
-               style={{color:"black"}}
+               style={{color:"black", width: "100%"}}
                data={data}
                selectedBtn={(text) => { btn(text)}}
             />
-            <View style={styles.view}>
-                <Text>{result}</Text>
+    
                 <TextInput
                   style={styles.input}
                   onChangeText={(text) => check(text)}
                 />
-            </View>
-        </>
+           
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    view: {
+    container: {
+        backgroundColor: "pink",
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
     },
     text: {
         fontSize: 28,
         color:"black",
-        paddingBottom: 10,
+        padding: 40,
         textAlign: "center"
     },
     input: {
@@ -86,6 +87,9 @@ const styles = StyleSheet.create({
       width: "50%",
       height: 40, 
       borderColor: 'gray', 
-      borderWidth: 1 
+      borderWidth: 1,
+      borderRadius: 10,
+      margin: 30,
+      fontSize: 22
     }
 })

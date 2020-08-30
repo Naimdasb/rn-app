@@ -26,17 +26,29 @@ export default function Home() {
 
     
     return (
-            <View>
-                  <Text>Dolar Oficial Venta:</Text>
-                  <Text>{ofVenta}</Text>
-                  <Text>Dolar Oficial Compra:</Text>
-                  <Text>{ofCompra}</Text>
-                  <Text>Dolar Blue Venta:</Text>
-                  <Text>{blueVenta}</Text>
-                  <Text>Dolar Blue Compra:</Text>
-                  <Text>{blueCompra}</Text>
+            <View style={styles.container}>
+                
+                  <Text style={styles.text}>Dolar Oficial Venta:</Text>
+                  <Text style={styles.text}>{ofVenta}</Text>
+                  <Text style={styles.text}>Dolar Oficial Compra:</Text>
+                  <Text style={styles.text}>{ofCompra}</Text>
+                  <Text style={styles.text}>Dolar Blue Venta:</Text>
+                  <Text style={styles.text}>{blueVenta}</Text>
+                  <Text style={styles.text}>Dolar Blue Compra:</Text>
+                  <Text style={styles.text}>{blueCompra}</Text>
+               
             </View>
     )
 }
 
-
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "pink",
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    text: {
+        fontSize: 40
+    }
+})
