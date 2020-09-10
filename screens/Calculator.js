@@ -10,8 +10,12 @@ export default function Calculator() {
     const [ofVenta, setOfVenta] = useState("")
     const [ofCompra, setOfCompra] = useState("")
     const [calc, setCalc] = useState(0)
-    const [data, setData] = useState([{ label: 'Oficial' }, { label: 'Blue' }])
-    const [value, setVal] = useState("Oficial")
+    const [data, setData] = useState([
+        { label: 'Oficial Venta' }, { label: 'Blue Venta' },
+        { label: 'Oficial Compra' }, { label: 'Blue Compra' }
+    
+    ])
+    const [value, setVal] = useState("Oficial Venta")
     const [result, setResult] = useState(0)
 
     useEffect(()=> {
@@ -31,40 +35,74 @@ export default function Calculator() {
 
     const check = (text) => {
 
-      if(value === "Oficial"){
-          setResult( text * parseInt(ofVenta))
-          setCalc(text)
-      } else {
-          setResult(text * parseInt(blueVenta))
-          setCalc(text)
-      }
+        switch(value) {
+            case 'Oficial Venta':
+                setResult( text * parseInt(ofVenta))
+                setCalc(text)
+                break;
+            case 'Blue Venta':
+                setResult( text * parseInt(blueVenta))
+                setCalc(text)
+                break;
+            case 'Oficial Compra':
+                setResult( text * parseInt(ofCompra))
+                setCalc(text)
+                break;
+            case 'Blue Compra':
+                setResult( text * parseInt(blueCompra))
+                setCalc(text)
+                break;            
+            default:
+                setResult( text * parseInt(ofVenta))
+                setCalc(text)
+            
+        }
     }
     
     const btn = (text) => {
 
-      if(text.label === "Oficial"){
-      setVal(text.label)
-      setResult(calc * parseInt(ofVenta))
-      } else {
-       setVal(text.label)
-       setResult(calc * parseInt(blueVenta))
-      }
+        switch(text.label) {
+            case 'Oficial Venta':
+                setVal(text.label)
+                setResult(calc * parseInt(ofVenta))
+                break;
+            case 'Blue Venta':
+                setVal(text.label)
+                setResult(calc * parseInt(blueVenta))
+                break;
+            case 'Oficial Compra':
+                setVal(text.label)
+                setResult(calc * parseInt(ofCompra))
+                break;
+            case 'Blue Compra':
+                setVal(text.label)
+                setResult(calc * parseInt(blueCompra))
+                break;
+            default:
+                setVal(text.label)
+                setResult(calc * parseInt(ofVenta))
+        }
     }
 
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>$ {result}</Text>
+            <Text style={styles.text}>$ {isNaN(result)? '0': result}</Text>
+            <TextInput
+                  style={styles.input}
+                  onChangeText={(text) => check(text)}
+            />
             <RadioButtonRN
                style={{color:"black", width: "100%"}}
                data={data}
+               activeColor='#3Cdf71'
+               boxActiveBgColor='#3Cdf7133'
+               initial={1}
+              
                selectedBtn={(text) => { btn(text)}}
             />
     
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(text) => check(text)}
-                />
+                
            
         </View>
     )
@@ -72,24 +110,28 @@ export default function Calculator() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "white",
+        backgroundColor: "#fff",
         flex: 1,
         alignItems: "center",
+        justifyContent: 'flex-start'
     },
     text: {
-        fontSize: 28,
+        fontSize: 15,
         color:"black",
-        padding: 40,
-        textAlign: "center"
+        textAlign: "center",
+        borderBottomWidth: 1,
+        borderBottomColor: "#3Cdf71",
+        margin: 40
     },
     input: {
       textAlign: "center",
-      width: "50%",
-      height: 40, 
-      borderColor: 'gray', 
+      width: "70%",
+      height: 40,
+      backgroundColor: '#3Cdf7105', 
+      borderColor: '#3Cdf71', 
       borderWidth: 1,
-      borderRadius: 10,
-      margin: 30,
-      fontSize: 22
+      borderRadius: 50,
+      fontSize: 15,
+      marginBottom: 20
     }
 })

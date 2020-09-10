@@ -31,7 +31,11 @@ const App: () => React$Node = () => {
   
     return(
       <NavigationContainer>
-        <Tab.Navigator>
+        <Tab.Navigator 
+          tabBarOptions={{
+          activeTintColor: '#3Cdf71',
+          inactiveTintColor: 'gray',
+        }}>
           <Tab.Screen name="Precios" component={Home}/>
           <Tab.Screen name="Calculadora" component={Calculator}/>
         </Tab.Navigator>

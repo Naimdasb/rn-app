@@ -28,6 +28,7 @@ export default function Home() {
     
     return (
             <View style={styles.container}>
+                <Text style={styles.head}>Dolaricese App</Text>
                 <View style={styles.priceBox}>
                     <View style={styles.iconBox}>
                     <Icon name="logo-usd" size={20} color="white" />
@@ -63,13 +64,13 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "white",
+        backgroundColor: "#fff",
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
     },
     priceBox: {
-        backgroundColor: "#eee",
+        backgroundColor: "#3Cdf7133",
         width: '90%',
         marginTop: 10,
         borderRadius: 40,
@@ -79,12 +80,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     text: {
-        fontSize: 20
+        fontSize: 15
     },
     iconBox: {
         backgroundColor: '#3Cdf71',
         borderWidth: 0,
         borderRadius: 40,
         padding: 15
+    },
+    head: {
+        margin: 40,
+        fontSize: 30,
     }
 })
