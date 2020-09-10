@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function Home() {
 
@@ -27,15 +28,34 @@ export default function Home() {
     
     return (
             <View style={styles.container}>
-                
-                  <Text style={styles.text}>Dolar Oficial Venta:</Text>
-                  <Text style={styles.text}>{ofVenta}</Text>
-                  <Text style={styles.text}>Dolar Oficial Compra:</Text>
-                  <Text style={styles.text}>{ofCompra}</Text>
-                  <Text style={styles.text}>Dolar Blue Venta:</Text>
-                  <Text style={styles.text}>{blueVenta}</Text>
-                  <Text style={styles.text}>Dolar Blue Compra:</Text>
-                  <Text style={styles.text}>{blueCompra}</Text>
+                <View style={styles.priceBox}>
+                    <View style={styles.iconBox}>
+                    <Icon name="logo-usd" size={20} color="white" />
+                    </View>
+                    <Text style={styles.text}>Dolar Oficial Venta:</Text>
+                    <Text style={styles.text}>{ofVenta}</Text>
+                </View>
+                <View style={styles.priceBox}>
+                    <View style={styles.iconBox}>
+                    <Icon name="logo-usd" size={20} color="white" />
+                    </View>
+                    <Text style={styles.text}>Dolar Oficial Compra:</Text>
+                    <Text style={styles.text}>{ofCompra}</Text>
+                </View>
+                <View style={styles.priceBox}>
+                    <View style={styles.iconBox}>
+                    <Icon name="logo-usd" size={20} color="white" />
+                    </View>
+                    <Text style={styles.text}>Dolar Blue Venta:</Text>
+                    <Text style={styles.text}>{blueVenta}</Text>
+                </View>
+                <View style={styles.priceBox}>
+                    <View style={styles.iconBox}>
+                    <Icon name="logo-usd" size={20} color="white" />
+                    </View>
+                    <Text style={styles.text}>Dolar Blue Compra:</Text>
+                    <Text style={styles.text}>{blueCompra}</Text>
+                </View>
                
             </View>
     )
@@ -43,12 +63,28 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "pink",
+        backgroundColor: "white",
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
     },
+    priceBox: {
+        backgroundColor: "#eee",
+        width: '90%',
+        marginTop: 10,
+        borderRadius: 40,
+        height: 100,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+    },
     text: {
-        fontSize: 40
+        fontSize: 20
+    },
+    iconBox: {
+        backgroundColor: '#3Cdf71',
+        borderWidth: 0,
+        borderRadius: 40,
+        padding: 15
     }
 })

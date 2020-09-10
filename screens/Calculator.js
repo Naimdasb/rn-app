@@ -72,7 +72,7 @@ export default function Calculator() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "pink",
+        backgroundColor: "white",
         flex: 1,
         alignItems: "center",
     },
