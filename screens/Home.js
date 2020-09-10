@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     priceBox: {
-        backgroundColor: "#3Cdf7133",
+        backgroundColor: "#3Cdf7160",
         width: '90%',
         marginTop: 10,
         borderRadius: 40,
@@ -80,7 +80,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     text: {
-        fontSize: 15
+        fontSize: 15,
+        color: 'black',
+        borderBottomWidth: 1,
+    
+        borderBottomColor: "#3Cdf7190"
     },
     iconBox: {
         backgroundColor: '#3Cdf71',
