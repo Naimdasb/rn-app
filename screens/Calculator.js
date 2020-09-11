@@ -48,13 +48,15 @@ export default function Calculator() {
             })
     }
 
-    const calculate = (text, key) => {
+    const calculate = (text, key, current) => {
         if(key === 0) {
-            setResult( text * parseInt(prices.ofVenta))
+            setResult( text * parseInt(current))
             setCalc(text)
+            setSelected(0)
         } else {
-            setResult_b( text / parseInt(prices.ofVenta))
+            setResult_b( text / parseInt(current))
             setCalc(text)
+            setSelected(1)
         }
     }
 
@@ -62,29 +64,29 @@ export default function Calculator() {
 
         switch(value) {
             case 'Oficial Venta':
-                calculate(text, key)
+                calculate(text, key, prices.ofVenta)
                 break;
             case 'Blue Venta':
-                calculate(text, key)
+                calculate(text, key, prices.blueVenta)
                 break;
             case 'Oficial Compra':
-                calculate(text, key)
+                calculate(text, key, prices.ofCompra)
                 break;
             case 'Blue Compra':
-                calculate(text, key)
+                calculate(text, key, prices.blueCompra)
                 break;    
             default:
-                calculate(text, key)
+                calculate(text, key, prices.ofVenta)
         }
     }
 
-    const reCalculate = (text) => {
-        setVal(text.label)
+    const reCalculate = (text, current) => {
+            setVal(text.label)
             if(selected === 0) {
-                setResult(calc * parseInt(prices.ofVenta))
-                return
+                setResult(calc * parseInt(current))
+                
             } else {
-                setResult_b( calc / parseInt(prices.ofVenta))
+                setResult_b( calc / parseInt(current))
             }
     }
     
@@ -92,20 +94,19 @@ export default function Calculator() {
 
         switch(text.label) {
             case 'Oficial Venta':
-               reCalculate(text)
+               reCalculate(text, prices.ofVenta)
                break;
             case 'Blue Venta':
-                reCalculate(text)
+                reCalculate(text, prices.blueVenta)
                 break;
             case 'Oficial Compra':
-                reCalculate(text)
+                reCalculate(text, prices.ofCompra)
                 break;
             case 'Blue Compra':
-                reCalculate(text)
+                reCalculate(text, prices.blueCompra)
                 break;
             default:
-                reCalculate(text)
-                break;
+                reCalculate(text, prices.ofVenta)
         }
     }
 
