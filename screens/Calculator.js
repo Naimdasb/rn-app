@@ -1,22 +1,32 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
+
 import RadioButtonRN from 'radio-buttons-react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default function Calculator() {
 
-    const [blueVenta, setBlueVenta] = useState("")
-    const [blueCompra, setBlueCompra] = useState("")
-    const [ofVenta, setOfVenta] = useState("")
-    const [ofCompra, setOfCompra] = useState("")
+    const [prices, setPrices] = useState({
+        blueVenta: '',
+        blueCompra: '',
+        ofVenta: '',
+        ofCompra: ''
+    })
+
     const [calc, setCalc] = useState(0)
-    const [data, setData] = useState([
+    
+    const [value, setVal] = useState("Oficial Venta")
+
+    const [result, setResult] = useState(0)
+    const [result_b, setResult_b] = useState(0)
+    
+    const [selected, setSelected] = useState(0)
+
+    const data = [
         { label: 'Oficial Venta' }, { label: 'Blue Venta' },
         { label: 'Oficial Compra' }, { label: 'Blue Compra' }
-    
-    ])
-    const [value, setVal] = useState("Oficial Venta")
-    const [result, setResult] = useState(0)
+    ]
 
     useEffect(()=> {
         getPrice()
@@ -26,84 +36,114 @@ export default function Calculator() {
         fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales')
             .then(res => res.json())
             .then(res => {
-                setBlueVenta(res[1].casa.venta.slice(0,6))
-                setBlueCompra(res[1].casa.compra.slice(0,6))
-                setOfVenta(res[0].casa.venta.slice(0,5))
-                setOfCompra(res[0].casa.compra.slice(0,5))
+
+                setPrices({
+                    blueVenta: res[1].casa.venta.slice(0,6),
+                    blueCompra: res[1].casa.compra.slice(0,6),
+                    ofVenta: res[0].casa.venta.slice(0,5),
+                    ofCompra: res[0].casa.compra.slice(0,5)
+
+                })
+               
             })
     }
 
-    const check = (text) => {
+    const calculate = (text, key) => {
+        if(key === 0) {
+            setResult( text * parseInt(prices.ofVenta))
+            setCalc(text)
+        } else {
+            setResult_b( text / parseInt(prices.ofVenta))
+            setCalc(text)
+        }
+    }
+
+    const check = (text, key) => {
 
         switch(value) {
             case 'Oficial Venta':
-                setResult( text * parseInt(ofVenta))
-                setCalc(text)
+                calculate(text, key)
                 break;
             case 'Blue Venta':
-                setResult( text * parseInt(blueVenta))
-                setCalc(text)
+                calculate(text, key)
                 break;
             case 'Oficial Compra':
-                setResult( text * parseInt(ofCompra))
-                setCalc(text)
+                calculate(text, key)
                 break;
             case 'Blue Compra':
-                setResult( text * parseInt(blueCompra))
-                setCalc(text)
-                break;            
+                calculate(text, key)
+                break;    
             default:
-                setResult( text * parseInt(ofVenta))
-                setCalc(text)
-            
+                calculate(text, key)
         }
+    }
+
+    const reCalculate = (text) => {
+        setVal(text.label)
+            if(selected === 0) {
+                setResult(calc * parseInt(prices.ofVenta))
+                return
+            } else {
+                setResult_b( calc / parseInt(prices.ofVenta))
+            }
     }
     
     const btn = (text) => {
 
         switch(text.label) {
             case 'Oficial Venta':
-                setVal(text.label)
-                setResult(calc * parseInt(ofVenta))
-                break;
+               reCalculate(text)
+               break;
             case 'Blue Venta':
-                setVal(text.label)
-                setResult(calc * parseInt(blueVenta))
+                reCalculate(text)
                 break;
             case 'Oficial Compra':
-                setVal(text.label)
-                setResult(calc * parseInt(ofCompra))
+                reCalculate(text)
                 break;
             case 'Blue Compra':
-                setVal(text.label)
-                setResult(calc * parseInt(blueCompra))
+                reCalculate(text)
                 break;
             default:
-                setVal(text.label)
-                setResult(calc * parseInt(ofVenta))
+                reCalculate(text)
+                break;
         }
     }
 
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>$ {isNaN(result)? '0': result}</Text>
-            <TextInput
-                  style={styles.input}
-                  onChangeText={(text) => check(text)}
-            />
+            <Text style={{marginTop: 30}}>Dolar a Pesos</Text>
+            <View style={styles.boxDisplay}>
+                <TextInput
+                    style={styles.input}
+                    onFocus={() => setSelected(0)}
+                    onChangeText={(text) => check(text, 0)}
+                />
+                <View style={styles.iconBox}>
+                    <Icon name="swap-horizontal-outline" size={20} color="#3C9f71" />
+                </View>
+                <Text style={styles.text}>$ {isNaN(result)? '0': result}</Text>
+            </View>
+            <Text>Pesos a Dolar</Text>
+            <View style={styles.boxDisplay}>
+                <TextInput
+                    style={styles.input}
+                    onFocus={() => setSelected(1)}
+                    onChangeText={(text) => check(text, 1)}
+                />
+                <View style={styles.iconBox}>
+                    <Icon name="swap-horizontal-outline" size={20} color="#3C9f71" />
+                </View>
+                <Text style={styles.text}>u$s {isNaN(result_b)? '0': result_b.toFixed(2)}</Text>
+            </View>
             <RadioButtonRN
                style={{color:"black", width: "100%"}}
-               data={data}
+               data={data}  
                activeColor='#3Cdf71'
                boxActiveBgColor='#3Cdf7133'
                initial={1}
-              
                selectedBtn={(text) => { btn(text)}}
             />
-    
-                
-           
         </View>
     )
 }
@@ -116,22 +156,34 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     text: {
+        flex: 1,
         fontSize: 15,
         color:"black",
         textAlign: "center",
         borderBottomWidth: 1,
         borderBottomColor: "#3Cdf71",
-        margin: 40
+        
     },
     input: {
       textAlign: "center",
-      width: "70%",
+      flex: 1,
+      width: "30%",
       height: 40,
       backgroundColor: '#3Cdf7105', 
       borderColor: '#3Cdf71', 
       borderWidth: 1,
       borderRadius: 50,
-      fontSize: 15,
-      marginBottom: 20
+      fontSize: 15
+    },
+    boxDisplay: {
+        flexDirection: 'row',
+        width: '90%',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        margin: 20
+    },
+    iconBox: {
+        flex: 1,
+        alignItems: 'center'
     }
 })

@@ -6,34 +6,22 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler';
-import React, {useState, useEffect} from 'react';
-import {
-  
-  StyleSheet,
-  View,
-  Text,
-  TextInput
-  
-} from 'react-native';
+import React from 'react';
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-
-
 
 import Calculator from './screens/Calculator'
 import Home from './screens/Home'
 
 const Tab = createMaterialTopTabNavigator();
 
-
 const App: () => React$Node = () => {
-  
     return(
       <NavigationContainer>
         <Tab.Navigator 
           tabBarOptions={{
-          activeTintColor: '#3Cdf71',
+          activeTintColor: '#3Caf71',
           inactiveTintColor: 'gray',
         }}>
           <Tab.Screen name="Precios" component={Home}/>
@@ -42,7 +30,5 @@ const App: () => React$Node = () => {
       </NavigationContainer>
     )
 }
-
-
 
 export default App;
