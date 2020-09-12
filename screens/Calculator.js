@@ -118,25 +118,28 @@ export default function Calculator() {
                 <TextInput
                     style={styles.input}
                     onFocus={() => setSelected(0)}
+                    
                     onChangeText={(text) => check(text, 0)}
                 />
                 <View style={styles.iconBox}>
-                    <Icon name="swap-horizontal-outline" size={20} color="#3C9f71" />
+                    <Icon name="swap-horizontal-outline" size={35} color="#3C9f71" />
                 </View>
-                <Text style={styles.text}>$ {isNaN(result)? '0': result}</Text>
+                <Text style={styles.text}>$ {isNaN(result)? '0': result.toFixed(2)}</Text>
             </View>
             <Text>Pesos a Dolar</Text>
             <View style={styles.boxDisplay}>
                 <TextInput
                     style={styles.input}
                     onFocus={() => setSelected(1)}
+                   
                     onChangeText={(text) => check(text, 1)}
                 />
                 <View style={styles.iconBox}>
-                    <Icon name="swap-horizontal-outline" size={20} color="#3C9f71" />
+                    <Icon name="swap-horizontal-outline" size={35} color="#3C9f71" />
                 </View>
                 <Text style={styles.text}>u$s {isNaN(result_b)? '0': result_b.toFixed(2)}</Text>
             </View>
+            <Text style={{marginTop: 30}}>Seleccione precio a cotizar</Text>
             <RadioButtonRN
                style={{color:"black", width: "100%"}}
                data={data}  
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
       textAlign: "center",
       flex: 1,
       width: "30%",
-      height: 40,
+      height: 42,
       backgroundColor: '#3Cdf7105', 
       borderColor: '#3Cdf71', 
       borderWidth: 1,

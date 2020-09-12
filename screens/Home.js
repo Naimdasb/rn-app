@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         padding: 15
     },
     head: {
-        margin: 40,
+        margin: 35,
         fontSize: 30,
     }
 })
