@@ -118,26 +118,26 @@ export default function Calculator() {
                 <TextInput
                     style={styles.input}
                     onFocus={() => setSelected(0)}
-                    
+                    maxLength={7}
                     onChangeText={(text) => check(text, 0)}
                 />
                 <View style={styles.iconBox}>
                     <Icon name="swap-horizontal-outline" size={35} color="#3C9f71" />
                 </View>
-                <Text style={styles.text}>$ {isNaN(result)? '0': result.toFixed(2)}</Text>
+                <Text style={styles.text}>$ {isNaN(result)? '0.00': result.toFixed(2)}</Text>
             </View>
             <Text>Pesos a Dolar</Text>
             <View style={styles.boxDisplay}>
                 <TextInput
                     style={styles.input}
                     onFocus={() => setSelected(1)}
-                   
+                    maxLength={7}
                     onChangeText={(text) => check(text, 1)}
                 />
                 <View style={styles.iconBox}>
                     <Icon name="swap-horizontal-outline" size={35} color="#3C9f71" />
                 </View>
-                <Text style={styles.text}>u$s {isNaN(result_b)? '0': result_b.toFixed(2)}</Text>
+                <Text style={styles.text}>u$s {isNaN(result_b)? '0.00': result_b.toFixed(2)}</Text>
             </View>
             <Text style={{marginTop: 30}}>Seleccione precio a cotizar</Text>
             <RadioButtonRN
